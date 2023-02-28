@@ -47,12 +47,13 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="root">
+       <div className="App">
       <div className="headStyle">
-        <p>My Todo List</p>
-        <p>React</p>
+        <div>My Todo List</div>
+        <div>React</div>
       </div>
-      <div>
+      <div className="inputBox">
         제목 &nbsp;
         <input value={bigTd} onChange={changeBigTdHandler} />
         내용 &nbsp;
@@ -62,7 +63,7 @@ const App = () => {
 
       <div>
         <div >
-          <h1>Working..🐰</h1>  
+          <h2>Working..🐰</h2>  
           {doing.map((item) => {
             if (item.completed === false){
               return (
@@ -81,7 +82,7 @@ const App = () => {
           })}
         </div>
         <div >
-            <h1>Done..!🐻‍❄</h1>
+            <h2>Done..!🐻‍❄</h2>
               {doing.map((item) => {
               if (item.completed === true){
               return (
@@ -102,6 +103,8 @@ const App = () => {
         </div>
         </div>
     </div>
+    </div>
+   
   );
 };
 
