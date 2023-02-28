@@ -5,13 +5,13 @@ const App = () => {
   const [doing, setDoing] = useState([
     { id: 1, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보기!", completed: false, },
     { id: 2, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보자!", completed: false, },
-    { id: 3, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보고!", completed: true, },
-    { id: 4, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보자기!", completed:true, },
+    { id: 3, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보고!", completed: false, },
+    { id: 4, bigTd: "리액트를 공부하자", smallTd: "리액트 노션 보자기!", completed:false, },
   ]);
   const [bigTd, setBigTd] = useState("");
   const [smallTd, setSmallTd] = useState("");
 
-  const changeBidTdHandler = (event) => {
+  const changeBigTdHandler = (event) => {
     setBigTd(event.target.value);
   };
   const changeSmallTdHandler = (event) => {
@@ -24,8 +24,9 @@ const App = () => {
       smallTd,
       completed: false,
     };
-
-    setDoing([...doing, newDoing]);
+    setDoing([...doing, newDoing]); 
+    setBigTd("");
+    setSmallTd("");     
   };
   const clickDelButtonHandler = (id) => {
     const newDoing = doing.filter((doing) => doing.id !== id);
@@ -53,38 +54,39 @@ const App = () => {
       </div>
       <div>
         제목 &nbsp;
-        <input value={bigTd} onChange={changeBidTdHandler} />
+        <input value={bigTd} onChange={changeBigTdHandler} />
         내용 &nbsp;
         <input value={smallTd} onChange={changeSmallTdHandler} />
         <button onClick={clickButtonForAdd}>추가하기</button>
       </div>
 
       <div>
-        <div className="toDoBox">
-          <h1>Working..🐰</h1>
+        <div >
+          <h1>Working..🐰</h1>  
           {doing.map((item) => {
-            
             if (item.completed === false){
               return (
-                <div key={item.id} >
+                <div className="toDoBox">
+                <div key={item.id} className="box-style">
                 <p>{item.bigTd}</p>
                 <p>{item.smallTd}</p>
                 <button onClick={() => clickDelButtonHandler(item.id)}>
                   삭제하기
                 </button>
                 <button onClick={() => clickDoneButtonHandler(item.id)}>완료</button>
-                
+              </div>
               </div>
             );
             }
           })}
         </div>
+        <div >
             <h1>Done..!🐻‍❄</h1>
-          {doing.map((item) => {
-            
-            if (item.completed === true){
+              {doing.map((item) => {
+              if (item.completed === true){
               return (
-                <div key={item.id} >
+                <div className="toDoBox">
+                <div key={item.id} className="box-style">
                 <p>{item.bigTd}</p>
                 <p>{item.smallTd}</p>
 
@@ -93,9 +95,11 @@ const App = () => {
                 </button>
                 <button onClick={() => clickDoneButtonHandler(item.id)}>취소</button>
                 </div>
+                </div>
             );
             }
           })}
+        </div>
         </div>
     </div>
   );
